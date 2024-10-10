@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realmen Akademi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Kurs İçeriği */
+        .course-summary, .course-curriculum, .course-description {
+            margin-bottom: 40px;
+        }
+
+        .sc_heading {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sc_heading .title {
+            font-size: 2em;
+            color: #444;
+        }
+
+        /* Dersler ve Müfredat */
+        .curriculum-sections, .section-content {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .step {
+            background-color: #0056b3;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .course-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .meta-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .course-format-icon {
+            margin-right: 10px;
+            color: #007BFF;
+        }
+
+        .index {
+            background-color: #28a745;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .lesson-title {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .lesson-title:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .course-item-meta {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* İncelemeler */
+        .meta-item-review {
+            margin-top: 20px;
+        }
+
+        .review-stars-rated {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .review-star {
+            position: relative;
+            width: 17px;
+            height: 16px;
+        }
+
+        .review-star .far, .review-star .fas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .review-star .fas {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        /* Eğitim Özellikleri */
+        .thim-course-info {
+            margin-top: 30px;
+        }
+
+        .thim-course-info h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .thim-course-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .thim-course-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .thim-course-info li i {
+            margin-right: 10px;
+            color: #007BFF;
+            font-size: 1.2em;
+        }
+
+        .course-wishlist-box {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .course-wishlist-button {
+            background-color: #ffc107;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .course-wishlist-button:hover {
+            background-color: #e0a800;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 40px 0;
+        }
+
+        .footer-top {
+            border-bottom: 1px solid #444;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-widget {
+            margin-bottom: 20px;
+        }
+
+        .footer-widget h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ffc107;
+        }
+
+        .footer-links, .footer-contact {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li, .footer-contact li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a, .footer-contact a {
+            color: #ffc107;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover, .footer-contact a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* Popup İçeriği */
+        #popup-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-item-summary h1 {
+            font-size: 2em;
+            color: #007BFF;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-item-description {
+            text-align: justify;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .content-item-description p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #ff5722;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .course-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .course-wishlist-box {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Realmen Akademi</h1>
+    </header>
+
+    <!-- Ana İçerik -->
+    <div class="container">
+
+        <!-- Popup İçeriği -->
+        <div id="popup-content">
+            <div id="learn-press-content-item">
+                <div class="content-item-scrollable">
+                    <div class="content-item-wrap">
+                        <div class="content-item-summary">
+                            <h1 class="course-item-title question-title">EĞİTİM HAKKINDA</h1>
+                            <div class="content-item-description lesson-description">
+                                <p><span class="highlight">Bu Eğitim Kimler İçindir?</span></p>
+                                <p>Realmen, kendini geliştirmek isteyen ve hedeflerinin bir hayalden ibaret olmamasını isteyen 18 yaşından büyük tüm erkekler içindir.</p>
+                                <p>Bu eğitime başlayacak kişiler, başarıya ulaşabilmek için sahip oldukları özelliklerin pozitif ve negatif yönlerini açık bir şekilde ortaya koyabilmelidir.</p>
+                                <p>“Başarılı Bir Erkeğin Özellikleri” bölümünde kişisel gelişimine katkı sağlayacak tüm faktörler bilimsel araştırmalar ve Realmen’nın hayat tecrübesi ile ele alındı. Bu bölümde başarıyı etkileyen her konu, sahip olduğu özellikleri geliştirmek isteyen ve eksikliğine yönelik sıfırdan başlangıç yapmak isteyen erkeklere hitap edecek şekilde ele alındı.</p>
+                                <p>“Kendini Tanı ve Sana Engel Olan Her Şeyden Kurtul, Hemen!” bölümünde doğduğumuz günden bu yana içine alındığımız, zaman zaman fark edip bazen de farkına varamadığımız toplumsal kalıplar ele alındı. Toplumsal kalıplardan sıyrılıp kendi özüne ulaşması ve çevreden bağımsız hayatta istediklerine açıklık getirmesi için izlemesi gereken adımlardan bahsedildi. Özüne ulaşan bir erkek, gerçek hedeflerine nasıl odaklanacağını ve yaşayacağı stres ile nasıl baş edebileceğini öğrenecek. Oto Hipnoz yöntemleri ile hedeflerine giden yolu kolaylaştıracak.</p>
+                                <p>“Konfor Alanı” bölümünde kişilerin sahip olduğu düzeni nasıl şekillendirileceğinden, konfor alanının kişinin hayatına pozitif ve negatif tüm etkilerinden bahsedildi. Bu bölümün sonunda ise konfor alanının nasıl terk edilmesi gerektiğine değinildi.</p>
+                                <p>“Kendi Zincirlerini Kır!” bölümünde toplumsal baskılara ve kişilerin kendine çizdiği çerçeveye nasıl hapsolduğundan bahsedildi. Bölümün sonunda da kişilerin toplumsal kalıplardan ve daha da önemli olan kendine koyduğu sınırlardan nasıl kurtulacağı anlatıldı.</p>
+                                <p>“İlişki Psikolojisi” bölümünde dışarıdan bakıldığında dipsiz bir kuyuya benzeyen kadınlar dünyasına derin bir giriş yapıldı. Kadın düşünce sisteminin hangi temeller üzerine kurulduğu, psikolojileri bilimsel araştırmalar eşliğinde ele alındı. Kadın davranışları; yaş gruplarına, karakteristik özelliklerine ve sosyal statülerine göre ayrılarak incelendi. Kadınlar kısmı sayesinde analiz yeteneği güçlenen erkekler, kadınların erkeklere olan bakış açısını kavrayabilir hale gelecek. Testosteron ve Maskülenite ile erkeğin seksepalitesini etkileyen tüm detayların nedenleri ve sonuçları irdelendi. Kadın psikolojisini çözümleyen erkekler, tanışma ve buluşma aşamasında yaşayacakları tüm zorlukların çözümünü İlk Tanışma ve Buluşma kısmında bulacak. Kadın ile etkileşime geçen erkekler, diğer buluşmalarını nasıl yöneteceğini, dikkat etmesi gereken detayları ve öne çıkarması gereken özellikleri bu bölümün sonunda bulacaktır.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kurs Özeti -->
+        <div class="course-summary">
+            <div id="tab-overview" class="row_content_course">
+                <div class="sc_heading clone_title text-left">
+                    <h2 class="title">Değerlendirme</h2>
+                    <div class="clone">Değerlendirme</div>
+                </div>
+                
+                <div class="course-description" id="learn-press-course-description">
+                    <div class="thim-course-content">
+                        <p style="text-align: center;"><strong><em>Bugün kendin için yapacağın tek bir şey, yarın yaşayacağın birçok şeyi değiştirebilir.</em></strong></p>
+                        <p style="text-align: center;">Eğitim setinin<strong> %100’ü dijital</strong> ortamda okunmaktadır.</p>
+                        <p>Eğitimin detayları için Realmen Akademi Limited Şirketi’ne github üzerinden ulaşabilirsiniz!</p>
+                        <p style="text-align: center;"><strong>Github:</strong> <a href="https://github.com/penia3001" p="color:#007BFF;">@github.com/penia3001</a></p>
+                        <p><strong>Eğitim setini 18 yaşından küçüklerin alması yasaktır!</strong></p>
+                    </div>
+
+                    <div class="thim-course-info">
+                        <h3 class="title">Eğitim Özellikleri</h3>
+                        <ul>
+                            <li class="lectures-feature">
+                                <i class="fa fa-files-o"></i>
+                                <span class="label">Dersler</span>
+                                <span class="value">51</span>
+                            </li>
+                            <li class="quizzes-feature">
+                                <i class="fa fa-puzzle-piece"></i>
+                                <span class="label">Sınavlar</span>
+                                <span class="value">0</span>
+                            </li>
+                            <li class="duration-feature">
+                                <i class="fa fa-clock-o"></i>
+                                <span class="label">Süre</span>
+                                <span class="value">Ömür Boyu Erişim</span>
+                            </li>
+                            <li class="skill-feature">
+                                <i class="fa fa-level-up"></i>
+                                <span class="label">Yetenek Seviyesi</span>
+                                <span class="value">Başlangıç</span>
+                            </li>
+                            <li class="language-feature">
+                                <i class="fa fa-language"></i>
+                                <span class="label">Dil</span>
+                                <span class="value">Türkçe</span>
+                            </li>
+                            <li class="students-feature">
+                                <i class="fa fa-users"></i>
+                                <span class="label">Öğrenciler</span>
+                                <span class="value">2341</span>
+                            </li>
+                            <li class="assessments-feature">
+                                <i class="fa fa-check-square-o"></i>
+                                <span class="label">Değerlendirme</span>
+                                <span class="value">Evet</span>
+                            </li>
+                        </ul>
+                        <div class="course-wishlist-box">
+                            <button class="course-wishlist-button" title="Bu dersi favorilere ekle">Favorilere Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Müfredat -->
+    <div class="course-curriculum" id="learn-press-course-curriculum">
+        <div class="curriculum-scrollable">
+            <ul class="curriculum-sections">
+                <!-- ÖN YAZI Bölümü -->
+                <li class="section" id="section-14" data-id="14" data-section-id="14">
+                    <div class="section-header">
+                        <div class="section-left">
+                            <span class="section-toggle collapse"></span>
+                            <h3 class="section-title">ÖN YAZI</h3>
+                            <span class="meta">
+                                <span class="step">1/1</span>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="section-content">
+                        <li class="course-item course-item-lp_lesson course-item-12326 has-status status-completed passed" data-id="12326">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>1.1</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://penia3001.github.io/realmen_baslangic.github.io/">
+                                <span class="item-name">BAŞLANGIÇ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Realmen ÇAPKIN KİMDİR? Bölümü -->
+                <li class="section" id="section-15" data-id="15" data-section-id="15">
+                    <div class="section-header">
+                        <div class="section-left">
+                            <span class="section-toggle collapse"></span>
+                            <h3 class="section-title">Realmen ÇAPKIN KİMDİR?</h3>
+                            <span class="meta">
+                                <span class="step">1/1</span>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="section-content">
+                        <li class="course-item course-item-lp_lesson course-item-12328 has-status status-completed passed" data-id="12328">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>2.1</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">GİRİŞ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- BAŞARILI BİR ERKEĞİN SAHİP OLMASI GEREKEN ÖZELLİKLER Bölümü -->
+                <li class="section" id="section-16" data-id="16" data-section-id="16">
+                    <div class="section-header">
+                        <div class="section-left">
+                            <span class="section-toggle collapse"></span>
+                            <h3 class="section-title">BAŞARILI BİR ERKEĞİN SAHİP OLMASI GEREKEN ÖZELLİKLER</h3>
+                            <span class="meta">
+                                <span class="step">3/19</span>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="section-content">
+                        <li class="course-item course-item-lp_lesson course-item-12331 has-status status-completed passed" data-id="12331">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.1</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">GİRİŞ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12336" data-id="12336">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.2</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">ÖZ GÜVEN</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12338" data-id="12338">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.3</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">ÖZ SAYGI</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12340 has-status status-completed passed" data-id="12340">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.4</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">BEDEN DİLİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12346" data-id="12346">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.5</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">DİKSİYON</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12348" data-id="12348">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.6</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">İLETİŞİM BECERİLERİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12350" data-id="12350">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>3.7</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">İLETİŞİM BECERİLERİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Kadınların İlgisini Çekme Yolları Bölümü -->
+                <li class="section" id="section-17" data-id="17" data-section-id="17">
+                    <div class="section-header">
+                        <div class="section-left">
+                            <span class="section-toggle collapse"></span>
+                            <h3 class="section-title">KADINLARIN İLGİSİNİ ÇEKME YOLLARI</h3>
+                            <span class="meta">
+                                <span class="step">3/12</span>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="section-content">
+                        <li class="course-item course-item-lp_lesson course-item-12345 has-status status-completed passed" data-id="12345">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>4.1</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">KENDİNİ GÖSTER</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12346" data-id="12346">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>4.2</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">KENDİNE GÜVEN</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12347" data-id="12347">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>4.3</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">DİYET VE BEDEN DİLİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12348" data-id="12348">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>4.4</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">KENDİNE ÖZEN GÖSTER</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12349" data-id="12349">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>4.5</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">KENDİNİ GÜÇLÜ HİSSET</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- İlişkilerde Başarı Bölümü -->
+                <li class="section" id="section-18" data-id="18" data-section-id="18">
+                    <div class="section-header">
+                        <div class="section-left">
+                            <span class="section-toggle collapse"></span>
+                            <h3 class="section-title">İLİŞKİLERDE BAŞARI</h3>
+                            <span class="meta">
+                                <span class="step">2/3</span>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="section-content">
+                        <li class="course-item course-item-lp_lesson course-item-12350" data-id="12350">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>5.1</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">İLETİŞİM BECERİLERİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12351" data-id="12351">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>5.2</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">EMPATİ YETENEĞİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12352" data-id="12352">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>5.3</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">KARŞILIKLI SAYGI VE GÜVEN</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12353" data-id="12353">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>5.4</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">TARTIŞMA DURUMLARINDA SAKİN KALMAK</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                        <li class="course-item course-item-lp_lesson course-item-12354" data-id="12354">
+                            <div class="meta-left">
+                                <span class="course-format-icon"><i class="fa fa-file-o"></i></span>
+                                <div class="index"><span class="label">Ders</span>5.5</div>
+                            </div>
+                            <a class="lesson-title course-item-title button-load-item" href="https://github.com/penia3001">
+                                <span class="item-name">SAĞLIKLI TARTIŞMA YÖNTEMLERİ</span>
+                            </a>
+                            <div class="course-item-meta">
+                                <span class="item-meta course-item-status" title="Okunmamış"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <!-- Hakkımızda -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="widget-title">Hakkımızda</h3>
+                            <p>Bu platform, ilişkilerde başarıya ulaşmanın yollarını öğrenmek ve kişisel gelişim yolculuğunuzda size rehberlik etmek için oluşturulmuştur. Amacımız, ilişkilerde etkili iletişim kurmanızı ve başarılı olmanızı sağlamaktır.</p>
+                        </div>
+                    </div>
+                    <!-- Kategoriler -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="widget-title">Kategoriler</h3>
+                            <ul class="footer-links">
+                                <li><a href="#section-16">Duygusal Zekâ</a></li>
+                                <li><a href="#section-17">Kadınların İlgisini Çekme Yolları</a></li>
+                                <li><a href="#section-18">İlişkilerde Başarı</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- İletişim -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-widget">
+                            <h3 class="widget-title">İletişim</h3>
+                            <ul class="footer-contact">
+                                <li><i class="fa fa-envelope"></i> info@sehvetsustasi.com</li>
+                                <li><i class="fa fa-phone"></i> +90 123 456 78 90</li>
+                                <li><i class="fa fa-map-marker"></i> İstanbul, Türkiye</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="text-center">© 2024 Realmen Akademi. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
